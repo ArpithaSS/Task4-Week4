@@ -1,0 +1,81 @@
+1) Get all the countries from Asia continent /region using Filter function
+
+var request=new XMLHttpRequest();
+request.open('GET', 'https://restcountries.eu/rest/v2/all', true);
+request.send();
+request.onload=function(){
+    var data=JSON.parse(this.response);   
+    var res=data.filter((item)=>{
+       return item.region==='Asia';
+    });
+    for(var i=0;i<res.length;i++){
+        console.log(res[i].name);
+    }
+    
+
+}
+
+2)Get all the countries with population of less than 2 lacs using Filter function
+
+var request=new XMLHttpRequest();
+request.open('GET', 'https://restcountries.eu/rest/v2/all', true);
+request.send();
+request.onload=function(){
+    var data=JSON.parse(this.response);
+    //console.log(data[0]);   
+    var res=data.filter((item)=>{
+       return item.population<200000;
+    });
+    for(var i=0;i<res.length;i++){
+        console.log(res[i].name);
+    }
+    
+}
+
+
+3) Print the following details name, capital, flag using forEach function 
+
+var request=new XMLHttpRequest();
+request.open('GET', 'https://restcountries.eu/rest/v2/all', true);
+request.send();
+request.onload=function(){
+    var data=JSON.parse(this.response); 
+    data.forEach(function(item) {
+        console.log(item.name);
+        console.log(item.capital);
+        console.log(item.flag);
+    });
+   
+}
+
+
+4) Print the total population of countries using reduce function 
+
+var request=new XMLHttpRequest();
+request.open('GET', 'https://restcountries.eu/rest/v2/all', true);
+request.send();
+request.onload=function(){
+    var data=JSON.parse(this.response); 
+    const total = data.reduce((accumulator, element) => {
+        return accumulator + element.population;
+      }, 0);
+      console.log(total);
+}
+
+5) Print the country which use US Dollars as currency.
+
+var request=new XMLHttpRequest();
+request.open('GET', 'https://restcountries.eu/rest/v2/all', true);
+request.send();
+request.onload=function(){
+    var data=JSON.parse(this.response); 
+    var res=data.filter((item)=>{
+        return item.currencies[0].code==='USD';
+     });
+     for(var i=0;i<res.length;i++){
+         console.log(res[i].name);
+     }
+}
+
+
+
